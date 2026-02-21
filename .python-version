@@ -1,2 +1,0 @@
-# Pin Python version for Render to match local environment
-PYTHON_VERSION=3.10.6
