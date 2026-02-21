@@ -44,8 +44,8 @@ This creates a scalable, transparent, and tech-driven river protection ecosystem
 
 **For Software:**
 - **Languages used:** Python, HTML, CSS, JavaScript
-- **Frameworks used:** Flask (Python backend), Bootstrap/Custom CSS (Frontend templates)
-- **Libraries used:** TensorFlow/Keras, Werkzeug, NumPy, Pillow, SQLite3
+- **Frameworks used:** Flask (Python backend), Custom CSS (Frontend templates)
+- **Libraries used:** TensorFlow, Werkzeug, NumPy, Pillow, SQLite3
 - **Tools used:** VS Code, Git
 
 ---
@@ -67,8 +67,8 @@ List the key features of your project:
 #### Installation
 ```bash
 # Clone the repository (if applicable)
-git clone https://github.com/melizabyiju/Tink-Her-Hack-4.0.git
-cd Tink-Her-Hack-4.0
+git clone https://github.com/melizabyiju/Tink-Her-Hack-4.git
+cd Tink-Her-Hack-4
 
 # Install required Python dependencies
 pip install -r requirements.txt
