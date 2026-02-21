@@ -88,15 +88,13 @@ python app.py
 #### Screenshots (Add at least 3)
 
 ![Screenshot1](docs/screenshot_1.png)
-*Upload Interface: Shows the file upload and location input for detecting pollution.*
+*Shows the file upload and location input for detecting pollution.*
 
 ![Screenshot2](docs/screenshot_2.png)
-*User Dashboard: Allows users to track their past reports and accumulated reward points.*
+*Allows users to track their past reports and accumulated reward points.*
 
 ![Screenshot3](docs/screenshot_3.png)
-*Admin Panel: Enables authorities to review submitted 'Polluted' reports and mark them as 'Done'.*
-
-*(Note: Replace `docs/screenshot_1.png` etc. with actual screenshot paths once captured)*
+*Enables authorities to review submitted 'Polluted' reports and mark them as 'Done'.*
 
 #### Diagrams
 
