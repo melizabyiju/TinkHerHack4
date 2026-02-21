@@ -67,8 +67,8 @@ List the key features of your project:
 #### Installation
 ```bash
 # Clone the repository (if applicable)
-git clone https://github.com/melizabyiju/Tink-Her-Hack-4.git
-cd Tink-Her-Hack-4
+git clone https://github.com/melizabyiju/TinkHerHack4.git
+cd TinkHerHack4
 
 # Install required Python dependencies
 pip install -r requirements.txt
