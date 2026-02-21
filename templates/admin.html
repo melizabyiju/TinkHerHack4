@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - RiverClean</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 40px -10px rgba(15, 23, 42, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 min-h-screen relative pb-12">
+    <!-- Decorative background -->
+    <div class="fixed top-0 right-0 -mr-40 -mt-40 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-3xl z-[-1]">
+    </div>
+    <div class="fixed bottom-0 left-0 -ml-40 -mb-40 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-3xl z-[-1]">
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+
+        <!-- Navigation Bar -->
+        <nav class="glass-panel rounded-2xl p-4 mb-8 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span
+                    class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-indigo-600">
+                    RiverClean Admin
+                </span>
+            </div>
+            <div class="flex space-x-6 text-sm font-medium items-center">
+                <a href="{{ url_for('index') }}" class="text-slate-500 hover:text-blue-600 transition-colors">Detect
+                    Waste</a>
+                <a href="{{ url_for('dashboard') }}"
+                    class="text-slate-500 hover:text-blue-600 transition-colors">Dashboard</a>
+                <span class="px-3 py-1 bg-indigo-50 border border-indigo-100 text-indigo-700 rounded-lg">Admin
+                    Panel</span>
+                <a href="{{ url_for('logout') }}"
+                    class="text-red-500 hover:text-red-600 transition-colors ml-4">Logout</a>
+            </div>
+        </nav>
+
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-slate-800 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mr-3 text-indigo-500" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                Admin Control Panel
+            </h1>
+            <p class="text-slate-500 mt-2">Manage and update the cleaning status of polluted river reports.</p>
+        </div>
+
+        {% if reports %}
+        <!-- Reports Table -->
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50/80 text-slate-500 text-xs tracking-wider uppercase">
+                            <th class="p-5 font-bold border-b border-slate-200">Date Reported</th>
+                            <th class="p-5 font-bold border-b border-slate-200">User</th>
+                            <th class="p-5 font-bold border-b border-slate-200">Image Evidence</th>
+                            <th class="p-5 font-bold border-b border-slate-200">Location</th>
+                            <th class="p-5 font-bold border-b border-slate-200">Status</th>
+                            <th class="p-5 font-bold border-b border-slate-200 text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        {% for r in reports %}
+                        <tr class="hover:bg-slate-50/50 transition-colors group">
+                            <td class="p-5 text-sm text-slate-500 whitespace-nowrap">{{ r['timestamp'] }}</td>
+                            <td class="p-5 text-sm font-semibold text-slate-800">{{ r['username'] }}</td>
+                            <td class="p-5">
+                                <img src="{{ url_for('uploaded_file', filename=r['filename']) }}"
+                                    class="w-28 h-16 object-cover rounded-xl border border-slate-200 shadow-sm group-hover:border-indigo-300 transition-colors"
+                                    alt="River Evidence" />
+                            </td>
+                            <td class="p-5">
+                                <a href="https://maps.google.com/?q={{ r['location'] }}" target="_blank"
+                                    class="inline-flex items-center space-x-1.5 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>Map</span>
+                                </a>
+                            </td>
+                            <td class="p-5">
+                                <span id="status-{{ r['id'] }}"
+                                    class="px-3 py-1.5 text-xs font-bold rounded-full border 
+                                    {% if r['status'] == 'Pending' %}bg-amber-50 text-amber-700 border-amber-200{% else %}bg-green-50 text-green-700 border-green-200{% endif %}">
+                                    {{ r['status'] }}
+                                </span>
+                            </td>
+                            <td class="p-5 text-right">
+                                {% if r['status'] == 'Pending' %}
+                                <button id="btn-{{ r['id'] }}" onclick="markDone({{ r['id'] }})"
+                                    class="inline-flex items-center justify-center px-4 py-2 text-sm font-bold text-white bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 rounded-xl transition-all shadow-sm hover:shadow-emerald-500/20">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1.5" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    Mark Cleaned
+                                </button>
+                                {% else %}
+                                <button disabled
+                                    class="inline-flex items-center justify-center px-4 py-2 text-sm font-bold text-slate-400 bg-slate-100 rounded-xl cursor-not-allowed">
+                                    Resolved
+                                </button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% else %}
+        <div
+            class="text-center py-20 bg-white rounded-3xl border border-slate-200 shadow-sm flex flex-col items-center">
+            <div class="text-6xl mb-4">🎉</div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">All Clear!</h3>
+            <p class="text-slate-500">No polluted reports currently pending. The rivers are clean.</p>
+        </div>
+        {% endif %}
+
+        <div class="mt-12 text-center text-sm text-slate-400 font-medium pb-8">
+            &copy; 2026 RiverClean &mdash; A student project for a cleaner planet 🌎
+        </div>
+    </div>
+
+    <script>
+        function markDone(reportId) {
+            if (!confirm("Are you sure you want to mark this location as officially cleaned?")) return;
+
+            const btn = document.getElementById('btn-' + reportId);
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Updating...';
+            btn.disabled = true;
+
+            fetch('/update_status/' + reportId, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const statusSpan = document.getElementById('status-' + reportId);
+                        statusSpan.innerText = 'Done';
+                        // Update classes
+                        statusSpan.className = 'px-3 py-1.5 text-xs font-bold rounded-full border bg-green-50 text-green-700 border-green-200';
+
+                        btn.innerHTML = 'Resolved';
+                        btn.className = 'inline-flex items-center justify-center px-4 py-2 text-sm font-bold text-slate-400 bg-slate-100 rounded-xl cursor-not-allowed';
+                    } else {
+                        alert('Error updating status. Please try again.');
+                        btn.innerHTML = originalHTML;
+                        btn.disabled = false;
+                    }
+                })
+                .catch(err => {
+                    alert('Network error while updating status');
+                    btn.innerHTML = originalHTML;
+                    btn.disabled = false;
+                });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<<<<<<< HEAD
+venv/
+.env
+__pycache__/
+*.pyc
+.idea/
+.vscode/
+
+# Database
+database.db
+
+# Uploads
+uploads/
+=======
+venv/
+.env
+__pycache__/
+*.pyc
+.idea/
+.vscode/
+
+# Database
+database.db
+
+# Uploads
+uploads/
+>>>>>>> 795595f3e10b8dca45411c7b32e8c0e5ece08407
