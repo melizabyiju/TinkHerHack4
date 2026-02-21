@@ -39,7 +39,7 @@ This creates a scalable, transparent, and tech-driven river protection ecosystem
 
 ### Technologies/Components Used
 
-**For Software:**
+**Tech Stack:**
 - **Languages used:** Python, HTML, CSS, JavaScript
 - **Frameworks used:** Flask (Python backend), Custom CSS (Frontend templates)
 - **Libraries used:** TensorFlow, Werkzeug, NumPy, Pillow, SQLite3
@@ -82,7 +82,7 @@ python app.py
 
 ### For Software:
 
-#### Screenshots (Add at least 3)
+#### Screenshots 
 
 ![Screenshot1](docs/screenshot_1.png)
 *Shows the file upload and location input for detecting pollution.*
@@ -93,17 +93,20 @@ python app.py
 ![Screenshot3](docs/screenshot_3.png)
 *Enables authorities to review submitted 'Polluted' reports and mark them as 'Done'.*
 
+![Screenshot4](docs/screenshot_4.png)
+*Register Interface.*
+
 #### Diagrams
 
 **System Architecture:**
 
 ![Architecture Diagram](docs/architecture.png)
-*Explain your system architecture: Users upload images -> Flask server -> TensorFlow Model predicts status -> Results and Location saved in SQLite database -> Authorities view actionable reports in Admin Panel.*
+*Users upload images -> Flask server -> TensorFlow Model predicts status -> Results and Location saved in SQLite database -> Authorities view actionable reports in Admin Panel.*
 
 **Application Workflow:**
 
 ![Workflow](docs/workflow.png)
-*Add caption explaining your workflow: Registration/Login -> Upload image & enter location -> AI Processing -> Display result -> If Polluted: Alert Admin & Add point to user -> Admin reviews & resolves issue.*
+*Registration/Login -> Upload image & enter location -> AI Processing -> Display result -> If Polluted: Alert Admin & Add point to user -> Admin reviews & resolves issue.*
 
 ---
 
@@ -183,6 +186,8 @@ Code review and optimization suggestions for frontend–backend communication.
 - UI/UX design decisions
 
 ---
+## Team(Individual)
+-  Meliza Mariya Byiju
 
 ## License
 
