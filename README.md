@@ -11,6 +11,9 @@ Proposing RiverClean - A web application that enables community-driven detection
 
 ### Team Member: Meliza Mariya Byiju(Individual)
 
+### Hosted Project link
+-The project is hosted in the local host http://127.0.0.1:5000
+
 ### Project Description
 RiverClean is an AI-powered web platform that detects river pollution using image-based analysis. Users upload images of polluted rivers, and the system uses computer vision to detect waste and classify pollution severity. Authorities receive geo-tagged alerts for faster cleanup and accountability.
 
@@ -159,7 +162,7 @@ python app.py
 ## Project Demo
 
 ### Video
-https://drive.google.com/file/d/1l8R2NQI2_LGh-ud-sRmlpaX6mqTwGXsO/view?usp=sharing
+https://drive.google.com/file/d/1uYWx-bSC_nSdGhDxySpMepOTZk-yftkw/view?usp=sharing
 ---
 
 ## AI Tools Used
